@@ -7,45 +7,45 @@ import com.fatec.sce.model.FabricaDeConexoes;
 
 public class TestaConexaoComDB {
 	/**
-	 * Objetivo: verificar o comportamento do sistema na conexão ao DB com 
+	 * Objetivo: verificar o comportamento do sistema na conexao ao DB com 
 	 * configuração válida
-	 * Pré-condição: a configuração default da fábrica de conexões é válida
+	 * Pre-condicao: a configuração default da fábrica de conexões é válida
 	 */
 	@Test
 	public void quandoConectaComOBancoRetornaOK() {
-		// Cenário
+		// Cenario
 		FabricaDeConexoes fabrica;
 
-		// Ação
+		// Acao
 		fabrica = new FabricaDeConexoes();
 
-		// Verificação
+		// Verificacao
 		assertNotNull(fabrica.getConnection());
 	}
 
 	/**
-	 * Objetivo: verificar o comportamento do sistema na conexão ao DB com senha de acesso
-	 * inválida
-	 * Pré-condição: a senha cadastrada é ""
+	 * Objetivo: verificar o comportamento do sistema na conexao ao DB com senha de acesso
+	 * invalida
+	 * Pre-condicao: a senha cadastrada eh ""
 	 */
 	@Test
 	public void quandoConectaComSenhaInvalida_SQLException() {
-		// Cenário
+		// Cenario
 		String url = "jdbc:mysql://localhost:3306/biblioteca";
 		String driver = "com.mysql.jdbc.Driver";
 		String usuario = "root";
-		String senha = "senhaErada"; // Senha inválida
+		String senha = "senhaErada"; // Senha invalida
 
 		FabricaDeConexoes fabricaDeConexoes = null;
 		ConfiguraDB configuraDB = new ConfiguraDB(url, driver, usuario, senha);
 		fabricaDeConexoes = new FabricaDeConexoes(configuraDB);
 
 		try {
-			// Ação
+			// Acao
 			fabricaDeConexoes.getConnection();
 			fail("Deveria falhar");
 		} catch (Exception e) {
-			// Verificação
+			// Verificacao
 			System.out.println(e.getMessage());
 			assertEquals(e.getMessage(),
 					"java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)");
@@ -53,16 +53,16 @@ public class TestaConexaoComDB {
 	}
 
 	/**
-	 * Objetivo: verificar o comportamento do sistema na conexão ao DB com usuário 
-	 * inválido
-	 * Pré-condição: usuário inválido
+	 * Objetivo: verificar o comportamento do sistema na conexao ao DB com usuario 
+	 * invalido
+	 * Pre-condicao: usuario invalido
 	 */
 	@Test
 	public void quandoConectaComUsuarioInvalido_SQLException() {
-		// Cenário
+		// Cenario
 		String url = "jdbc:mysql://localhost:3306/biblioteca";
 		String driver = "com.mysql.jdbc.Driver";
-		String usuario = "usuarioInvalido"; // Usuário inválido
+		String usuario = "usuarioInvalido"; // Usuário invalido
 		String senha = "";
 
 		FabricaDeConexoes fabricaDeConexoes = null;
@@ -70,11 +70,11 @@ public class TestaConexaoComDB {
 		fabricaDeConexoes = new FabricaDeConexoes(configuraDB);
 
 		try {
-			// Ação
+			// Acao
 			fabricaDeConexoes.getConnection();
 			fail("Deveria falhar");
 		} catch (Exception e) {
-			// Verificação
+			// Verificacao
 			System.out.println(e.getMessage());
 			assertEquals(e.getMessage(),
 					"com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Access denied for user ''@'localhost' to database 'biblioteca'");
@@ -82,15 +82,15 @@ public class TestaConexaoComDB {
 	}
 
 	/**
-	 * Objetivo: verificar o comportamento do sistema na conexão ao DB com driver 
-	 * inválido
-	 * Pré-condição:
+	 * Objetivo: verificar o comportamento do sistema na conexao ao DB com driver 
+	 * invalido
+	 * Pre-condicao:
 	 */
 	@Test
 	public void quandoConectaComDriverInvalido_SQLException() {
-		// Cenário
+		// Cenario
 		String url = "jdbc:mysql://localhost:3306/biblioteca";
-		String driver = "com.mysql.jdbc.Drive-in"; // Driver inválido
+		String driver = "com.mysql.jdbc.Drive-in"; // Driver invalido
 		String usuario = "root";
 		String senha = "";
 
@@ -99,11 +99,11 @@ public class TestaConexaoComDB {
 		fabricaDeConexoes = new FabricaDeConexoes(configuraDB);
 
 		try {
-			// Ação
+			// Acao
 			fabricaDeConexoes.getConnection();
 			fail("Deveria falhar");
 		} catch (Exception e) {
-			// Verificação
+			// Verificacao
 			System.out.println(e.getMessage());
 			assertEquals(e.getMessage(), 
 					"java.lang.ClassNotFoundException: com.mysql.jdbc.Drive-in");
@@ -112,13 +112,13 @@ public class TestaConexaoComDB {
 
 	/**
 	 * Objetivo: verificar o comportamento do sistema na conexao ao DB com a porta 
-	 * inválida
-	 * Pré-condição:
+	 * invalida
+	 * Pre-condicao:
 	 */
 	@Test
 	public void quandoConectaComPortaInvalido_SQLException() {
-		// Cenário
-		String url = "jdbc:mysql://localhost:0000/biblioteca"; // Porta inválida
+		// Cenario
+		String url = "jdbc:mysql://localhost:0000/biblioteca"; // Porta invalida
 		String driver = "com.mysql.jdbc.Driver";
 		String usuario = "root";
 		String senha = "";
@@ -128,11 +128,11 @@ public class TestaConexaoComDB {
 		fabricaDeConexoes = new FabricaDeConexoes(configuraDB);
 
 		try {
-			// Ação
+			// Acao
 			fabricaDeConexoes.getConnection();
 			fail("Deveria falhar");
 		} catch (Exception e) {
-			// Verificação
+			// Verificacao
 			System.out.println(e.getMessage());
 			assertEquals(e.getMessage(),
 					"com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure\n"

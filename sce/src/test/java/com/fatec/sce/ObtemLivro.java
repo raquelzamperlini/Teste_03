@@ -8,6 +8,7 @@ public class ObtemLivro {
 		livro.setIsbn("121212");
 		livro.setTitulo("Engenharia de Software");
 		livro.setAutor("Pressman");
+		
 		return livro;
 	}
 
@@ -16,6 +17,7 @@ public class ObtemLivro {
 		livro.setIsbn("");
 		livro.setTitulo("Engenharia de Software");
 		livro.setAutor("Pressman");
+		
 		return livro;
 	}
 
@@ -24,6 +26,7 @@ public class ObtemLivro {
 		livro.setIsbn(null);
 		livro.setTitulo("Engenharia de Software");
 		livro.setAutor("Pressman");
+		
 		return livro;
 	}
 	
@@ -59,6 +62,7 @@ public class ObtemLivro {
 		livro.setIsbn("121212");
 		livro.setTitulo("Engenharia de Software");
 		livro.setAutor(null);
+		
 		return livro;
 	}
 }
